@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniel Ambegia — Elenitech</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --night-blue: #0b1a33;
+    --soft-cream: #f5e9d0;
+    --star-gold: #f2c879;
+    --highlight-yellow: #f9eab3;
+}
+
+/* FADE OVERLAY */
+.fade-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    opacity: 1;
+    z-index: 999;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+}
+
+.fade-overlay.hidden {
+    opacity: 0;
+}
+
+.fade-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Playfair Display', serif;
+    background: var(--night-blue);
+    color: var(--soft-cream);
+    min-height: 80vh;
+}
+
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11,26,51,0.95);
+    border-bottom: 1px solid rgba(242,200,121,0.5);
+}
+
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-header h1 {
+    font-size: 1.5em;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--star-gold);
+    margin: 0;
+}
+
+.main-nav {
+    display: flex;
+    gap: 28px;
+}
+
+.main-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85em;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,233,208,0.9);
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.main-nav a:hover {
+    color: var(--highlight-yellow);
+    text-shadow: 0 0 8px rgba(242,200,121,0.6);
+}
+
+.featured-art {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 60px 40px;
+    gap: 40px;
+    min-height: calc(80vh - 80px);
+    background: var(--night-blue);
+    position: relative;
+}
+
+.art-column {
+    flex: 1 1 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-left: 20px;
+}
+
+
+.artist-name {
+    font-size: 2.6em;
+    color: var(--star-gold);
+    text-shadow: 0 0 12px rgba(242,200,121,0.6);
+    margin: 0;
+}
+
+.portrait-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1em;
+    color: rgba(245,233,208,0.85);
+    margin-top: 6px;
+    margin-bottom: 12px;
+    letter-spacing: 0.03em;
+}
+
+.video-frame {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    aspect-ratio: 16 / 9;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 4px solid rgba(242,200,121,0.6);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 25px rgba(242,200,121,0.2) inset;
+    background: rgba(0,0,0,0.1);
+}
+
+.video-frame video.artwork {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.info-column {
+    flex: 1 1 35%;
+    color: var(--soft-cream);
+    font-family: 'Inter', sans-serif;
+    background: rgba(11,26,51,0.7);
+    padding: 24px 28px;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    margin-top: calc(92px + 1.1em + 12px);
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.info-column h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8em;
+    color: var(--star-gold);
+    margin-top: 0;
+    margin-bottom: 14px;
+}
+
+.info-column p {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.back-link {
+    text-align: center;
+    margin: 40px 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85em;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.back-link a {
+    color: var(--highlight-yellow);
+    text-decoration: none;
+    transition: text-shadow 0.3s ease;
+}
+
+.back-link a:hover {
+    text-shadow: 0 0 8px rgba(242,200,121,0.6);
+}
+
+
+@media (max-width: 1024px) {
+    .featured-art {
+        flex-direction: column;
+        padding: 40px 24px;
+    }
+
+    .art-column, .info-column {
+        flex: 1 1 100%;
+    }
+
+    .video-frame {
+        max-width: 90%;
+    }
+
+    .info-column {
+        max-height: none;
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-inner {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .main-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 18px;
+    }
+
+    .artist-name {
+        font-size: 2em;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="fade-overlay" id="fadeOverlay"></div>
+
+<header class="site-header">
+    <div class="header-inner">
+        <h1>Elenitech</h1>
+        <nav class="main-nav">
+            <a href="emptech-index.html">Home</a>
+            <a href="main-exhibit.html">Main Exhibit</a>
+            <a href="sell.html">Sell My Art</a>
+            <a href="archive.html">Archive</a>
+        </nav>
+    </div>
+</header>
+
+<section class="featured-art">
+    
+    <div class="art-column">
+        <h2 class="artist-name">Daniel Ambegia</h2>
+        <div class="portrait-title">Starry Reflections</div>
+        <div class="video-frame">
+            <video class="artwork" autoplay muted loop playsinline>
+                <source src="art1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <div class="info-column">
+        <h3>About This</h3>
+        <p>
+            This video artwork explores contemporary interpretations inspired by Van Gogh's <em>The Starry Night</em>.
+        </p>
+        <p>
+            Daniel Ambegia uses dynamic brushstroke simulations and color movements to evoke emotional responses associated with the night sky.
+        </p>
+        <p>
+            The interplay between light, shadow, and motion captures the essence of Van Gogh's swirling style while presenting a modern digital perspective.
+        </p>
+    </div>
+</section>
+
+<script>
+const overlay = document.getElementById("fadeOverlay");
+
+window.addEventListener("load", () => {
+    overlay.classList.add("hidden");
+});
+
+document.querySelectorAll("a[href]").forEach(link => {
+    link.addEventListener("click", e => {
+        const url = link.getAttribute("href");
+        if (!url.startsWith("#")) {
+            e.preventDefault();
+            overlay.classList.remove("hidden");
+            overlay.classList.add("active");
+            setTimeout(() => {
+                window.location.href = url;
+            }, 800);
+        }
+    });
+});
+</script>
+<div class="back-link">
+    <a href="emptech-profile.html">← Return to Feature</a>
+</div>
+
+</body>
+</html>

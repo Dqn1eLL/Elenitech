@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elenitech Supang Virtual Museum</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --night-blue: #0b1a33;
+    --deep-blue: #13294b;
+    --star-gold: #f2c879;
+    --soft-cream: #f5e9d0;
+    --accent-blue: #1c3a6d;
+    --highlight-yellow: #f9eab3;
+}
+
+/* BASE */
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background: var(--night-blue);
+    color: var(--soft-cream);
+    height: 100%;
+}
+
+/* HEADER */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11, 26, 51, 0.92);
+    border-bottom: 1px solid rgba(242, 200, 121, 0.4);
+}
+
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.site-header h1 {
+    margin: 0;
+    font-size: 1.35em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--star-gold);
+}
+
+.main-nav {
+    display: flex;
+    gap: 24px;
+}
+
+.main-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78em;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245, 233, 208, 0.9);
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.main-nav a:hover {
+    color: var(--highlight-yellow);
+    text-shadow: 0 0 6px rgba(242,200,121,0.6);
+}
+
+/* HERO */
+.hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* BACKGROUND VIDEO */
+.hero video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(1.05) contrast(1.03) saturate(1.05);
+}
+
+/* ATMOSPHERIC OVERLAY */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at center, rgba(246,215,139,0.18), transparent 55%),
+        linear-gradient(to bottom, rgba(8,23,46,0.35), rgba(8,23,46,0.65));
+    z-index: 1;
+}
+
+/* TWINKLING STARS */
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(242,200,121,0.08) 2px, transparent 2px) repeat;
+    background-size: 50px 50px;
+    animation: twinkle 6s infinite alternate;
+    z-index: 2;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.2; }
+    50% { opacity: 0.6; }
+    100% { opacity: 0.2; }
+}
+
+/* HERO CONTENT */
+.hero-content {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    max-width: 920px;
+    margin: auto;
+    padding: 0 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+/* MAIN TITLE */
+.hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.8em;
+    letter-spacing: 0.06em;
+    color: var(--star-gold);
+    margin-bottom: 14px;
+}
+
+/* SUBTITLE */
+.hero-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6em;
+    font-weight: 500;
+    color: rgba(249,234,179,0.85);
+    margin-bottom: 26px;
+}
+
+/* DESCRIPTION */
+.hero-content p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05em;
+    line-height: 1.8;
+    color: rgba(245,233,208,0.95);
+    max-width: 720px;
+    margin: 0 auto 46px;
+}
+
+/* BUTTON */
+.enter-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9em;
+    letter-spacing: 0.14em;
+    padding: 14px 44px;
+    border-radius: 999px;
+    border: 1px solid rgba(246,215,139,0.8);
+    color: var(--night-blue);
+    background: rgba(246,215,139,0.9);
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.enter-link:hover {
+    background: var(--highlight-yellow);
+    transform: translateY(-2px);
+    box-shadow: 0 0 12px rgba(242,200,121,0.6);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.6em;
+    }
+
+    .hero-content h2 {
+        font-size: 1.8em;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+    <video autoplay muted loop playsinline preload="auto">
+        <source src="bg-i.mp4" type="video/mp4">
+    </video>
+
+    <div class="hero-content">
+        <h1>Elenitech Supang</h1>
+        <h2>Virtual Museum</h2>
+        <p>
+            Explore a reflective digital space inspired by Vincent van Gogh’s
+            <em>The Starry Night</em>, created to study artistic expression,
+            historical context, and creative interpretation.
+        </p>
+        <a href="emptech-index.html" class="enter-link">ENTER THE MUSEUM</a>
+    </div>
+</section>
+
+</body>
+</html>
