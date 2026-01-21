@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elenitech Museum</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --night-blue: #0b1a33;
+    --deep-blue: #13294b;
+    --star-gold: #f2c879;
+    --soft-cream: #f5e9d0;
+    --accent-blue: #1c3a6d;
+    --highlight-yellow: #f9eab3;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Playfair Display', serif;
+    background: var(--night-blue);
+    color: var(--soft-cream);
+    height: 100%;
+}
+
+.fade-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    opacity: 1;
+    z-index: 999;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+}
+
+.fade-overlay.hidden {
+    opacity: 0;
+}
+
+.fade-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11, 26, 51, 0.92);
+    border-bottom: 1px solid rgba(242, 200, 121, 0.4);
+}
+
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.site-header h1 {
+    margin: 0;
+    font-size: 1.35em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--star-gold);
+}
+
+.main-nav {
+    display: flex;
+    gap: 24px;
+}
+
+.main-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78em;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245, 233, 208, 0.9);
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.main-nav a:hover {
+    color: var(--highlight-yellow);
+    text-shadow: 0 0 6px rgba(242,200,121,0.6);
+}
+
+.hero {
+    position: relative;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background:
+        linear-gradient(rgba(11,26,51,0.65), rgba(11,26,51,0.85)),
+        url("bg-index.jpg") center / cover no-repeat;
+}
+
+.hero-content {
+    max-width: 760px;
+    padding: 0 24px;
+}
+
+.hero-content h2 {
+    font-size: 2.8em;
+    margin-bottom: 18px;
+    color: var(--star-gold);
+    letter-spacing: 0.04em;
+}
+
+.hero-content p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05em;
+    line-height: 1.75;
+    color: rgba(245, 233, 208, 0.95);
+}
+
+footer {
+    border-top: 1px solid rgba(242, 200, 121, 0.35);
+    padding: 6px 10px;
+    text-align: center;
+    font-size: 0.62em;
+    font-family: 'Inter', sans-serif;
+    color: rgba(245, 233, 208, 0.6);
+}
+
+footer p {
+    margin: 0;
+    line-height: 1.4;
+}
+
+.license-icons {
+    margin-top: 4px;
+}
+
+.license-icons img {
+    width: 10px;
+    height: 10px;
+    margin-left: 4px;
+    vertical-align: middle;
+    opacity: 0.75;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.license-icons img:hover {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+@media (max-width: 768px) {
+    .header-inner {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .main-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+    }
+
+    .hero-content h2 {
+        font-size: 2.1em;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="fade-overlay" id="fadeOverlay"></div>
+
+<header class="site-header">
+    <div class="header-inner">
+        <h1>Elenitech</h1>
+        <nav class="main-nav">
+            <a href="main-exhibit.html">Main Exhibit</a>
+            <a href="emptech-profile.html">Feature</a>
+            <a href="sell.html">Sell My Art</a>
+            <a href="archive.html">Archive</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h2>An Online Museum of Expression</h2>
+        <p>
+            A curated digital archive honoring national artists, creative heritage,
+            and the evolving dialogue between art, culture, and technology.
+        </p>
+    </div>
+</section>
+
+<footer>
+    <p>
+        <a href="index.html">Elenitech</a> © 2026 ·
+        <a href="https://user.com">Daniel Ambegia</a> ·
+        <a href="https://creativecommons.org/licenses/by-nd/4.0/">CC BY-ND 4.0</a>
+    </p>
+    <div class="license-icons">
+        <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="Creative Commons">
+        <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="Attribution">
+        <img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="No Derivatives">
+    </div>
+</footer>
+
+<script>
+const overlay = document.getElementById("fadeOverlay");
+
+window.addEventListener("load", () => {
+    overlay.classList.add("hidden");
+});
+
+document.querySelectorAll("a[href]").forEach(link => {
+    link.addEventListener("click", e => {
+        const url = link.getAttribute("href");
+
+        if (!url.startsWith("#")) {
+            e.preventDefault();
+            overlay.classList.remove("hidden");
+            overlay.classList.add("active");
+
+            setTimeout(() => {
+                window.location.href = url;
+            }, 800);
+        }
+    });
+});
+</script>
+
+</body>
+</html>

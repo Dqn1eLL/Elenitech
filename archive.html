@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archive — Elenitech</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --night-blue: #0b1a33;
+    --soft-cream: #f5e9d0;
+    --star-gold: #f2c879;
+    --highlight-yellow: #f9eab3;
+}
+
+/* FADE OVERLAY */
+.fade-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    opacity: 1;
+    z-index: 999;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+}
+
+.fade-overlay.hidden {
+    opacity: 0;
+}
+
+.fade-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Playfair Display', serif;
+    background: var(--night-blue);
+    color: var(--soft-cream);
+    min-height: 100vh;
+}
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11,26,51,0.95);
+    border-bottom: 1px solid rgba(242,200,121,0.5);
+}
+
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-header h1 {
+    font-size: 1.5em;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--star-gold);
+    margin: 0;
+}
+
+.main-nav {
+    display: flex;
+    gap: 28px;
+}
+
+.main-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85em;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,233,208,0.9);
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.main-nav a:hover {
+    color: var(--highlight-yellow);
+    text-shadow: 0 0 8px rgba(242,200,121,0.6);
+}
+
+.page-title {
+    text-align: center;
+    margin: 40px 20px 20px;
+}
+
+.page-title h2 {
+    font-size: 2.4em;
+    color: var(--star-gold);
+    margin-bottom: 6px;
+}
+
+.page-title p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95em;
+    color: rgba(245,233,208,0.85);
+    margin: 0;
+}
+
+.archive-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1080px;
+    margin: 20px auto 60px;
+    padding: 0 20px;
+}
+
+.archive-card {
+    background: rgba(11,26,51,0.7);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(242,200,121,0.4);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.archive-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 38px rgba(0,0,0,0.8);
+}
+
+.archive-card img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.archive-card .card-info {
+    padding: 14px 18px;
+}
+
+.archive-card h3 {
+    margin: 0 0 6px;
+    font-size: 1.15em;
+    color: var(--star-gold);
+}
+
+.archive-card p {
+    margin: 0;
+    font-size: 0.95em;
+    color: rgba(245,233,208,0.85);
+}
+
+/* BACK LINK */
+.back-link {
+    text-align: center;
+    margin: 40px 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85em;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.back-link a {
+    color: var(--highlight-yellow);
+    text-decoration: none;
+    transition: text-shadow 0.3s ease;
+}
+
+.back-link a:hover {
+    text-shadow: 0 0 8px rgba(242,200,121,0.6);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .archive-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .archive-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .header-inner {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="fade-overlay" id="fadeOverlay"></div>
+
+<header class="site-header">
+    <div class="header-inner">
+        <h1>Elenitech</h1>
+        <nav class="main-nav">
+            <a href="emptech-index.html">Home</a>
+            <a href="main-exhibit.html">Main Exhibit</a>
+            <a href="emptech-profile.html">Feature</a>
+            <a href="sell.html">Sell My Art</a>
+        </nav>
+    </div>
+</header>
+
+<section class="page-title">
+    <h2>Archive</h2>
+    <p>Browse past exhibits and artworks</p>
+</section>
+
+<div class="archive-gallery">
+    <div class="archive-card">
+        <img src="art1.jpg" alt="Artwork 1">
+        <div class="card-info">
+            <h3>Starry Reflections</h3>
+            <p>Daniel Ambegia — 2025</p>
+        </div>
+    </div>
+
+    <div class="archive-card">
+        <img src="art2.jpg" alt="Artwork 2">
+        <div class="card-info">
+            <h3>Twilight Memories</h3>
+            <p>Myk Montemayor — 2025</p>
+        </div>
+    </div>
+
+    <div class="archive-card">
+        <img src="art3.jpg" alt="Artwork 3">
+        <div class="card-info">
+            <h3>Night Swirls</h3>
+            <p>Gabriel Belen — 2025</p>
+        </div>
+    </div>
+</div>
+
+<script>
+const overlay = document.getElementById("fadeOverlay");
+
+window.addEventListener("load", () => {
+    overlay.classList.add("hidden");
+});
+
+document.querySelectorAll("a[href]").forEach(link => {
+    link.addEventListener("click", e => {
+        const url = link.getAttribute("href");
+        if (!url.startsWith("#")) {
+            e.preventDefault();
+            overlay.classList.remove("hidden");
+            overlay.classList.add("active");
+            setTimeout(() => {
+                window.location.href = url;
+            }, 800);
+        }
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elenitech Virtual Museum</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --night-blue: #0b1a33;
+    --deep-blue: #13294b;
+    --star-gold: #f2c879;
+    --soft-cream: #f5e9d0;
+    --accent-blue: #1c3a6d;
+    --highlight-yellow: #f9eab3;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    background: var(--night-blue);
+    color: var(--soft-cream);
+}
+
+.fade-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    opacity: 1; 
+    pointer-events: all;
+    transition: opacity 0.9s ease;
+    z-index: 999;
+}
+
+.fade-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hero {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.hero video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(1.05) contrast(1.03) saturate(1.05);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at center, rgba(246,215,139,0.18), transparent 55%),
+        linear-gradient(to bottom, rgba(8,23,46,0.35), rgba(8,23,46,0.7));
+    z-index: 1;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(242,200,121,0.08) 2px, transparent 2px) repeat;
+    background-size: 50px 50px;
+    animation: twinkle 6s infinite alternate;
+    z-index: 2;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.2; }
+    50% { opacity: 0.6; }
+    100% { opacity: 0.2; }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    min-height: 100vh;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.6em, 5vw, 3.8em);
+    letter-spacing: 0.06em;
+    color: var(--star-gold);
+    margin: 0;
+}
+
+.hero-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8em, 4vw, 2.6em);
+    font-weight: 500;
+    color: rgba(249,234,179,0.85);
+    margin-top: 4px;
+}
+
+.hero-content p {
+    max-width: 720px;
+    font-size: 1.05em;
+    line-height: 1.8;
+    color: rgba(245,233,208,0.95);
+    margin: 28px auto 46px;
+}
+
+.enter-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+    letter-spacing: 0.14em;
+    padding: 14px 46px;
+    border-radius: 999px;
+    border: 1px solid rgba(246,215,139,0.8);
+    background: rgba(246,215,139,0.92);
+    color: var(--night-blue);
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.enter-link:hover {
+    background: var(--highlight-yellow);
+    transform: translateY(-2px);
+    box-shadow: 0 0 14px rgba(242,200,121,0.6);
+}
+
+@media (max-width: 600px) {
+    .hero-content p {
+        font-size: 0.95em;
+    }
+
+    .enter-link {
+        padding: 12px 36px;
+        font-size: 0.85em;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Fade overlay -->
+<div class="fade-overlay" id="fadeOverlay"></div>
+
+<section class="hero">
+    <video autoplay muted loop playsinline preload="auto">
+        <source src="bg.mp4" type="video/mp4">
+    </video>
+
+    <div class="hero-content">
+        <h1><b>Elenitech<b></h1>
+        <h2><b>Virtual Museum<b></h2>
+        <p>
+            <b>Explore a digital space where history, art, and technology converge.<b>
+        </p>
+        <a href="emptech-index.html" class="enter-link" id="enterMuseum">
+            <b>ENTER</b>
+        </a>
+    </div>
+</section>
+
+<script>
+const overlay = document.getElementById("fadeOverlay");
+const enterBtn = document.getElementById("enterMuseum");
+
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        overlay.classList.add("hidden");
+    }, 200);
+});
+
+enterBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    overlay.classList.remove("hidden");
+
+    setTimeout(() => {
+        window.location.href = this.href;
+    }, 900);
+});
+</script>
+
+</body>
+</html>

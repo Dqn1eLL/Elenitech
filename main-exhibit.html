@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Main Exhibit — Elenitech</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --night-blue: #0b1a33;
+    --deep-blue: #13294b;
+    --star-gold: #f2c879;
+    --soft-cream: #f5e9d0;
+    --accent-blue: #1c3a6d;
+    --highlight-yellow: #f9eab3;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Playfair Display', serif;
+    background: var(--night-blue);
+    color: var(--soft-cream);
+}
+
+.fade-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    opacity: 1;
+    z-index: 999;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+}
+
+.fade-overlay.hidden {
+    opacity: 0;
+}
+
+.fade-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11, 26, 51, 0.92);
+    border-bottom: 1px solid rgba(242, 200, 121, 0.4);
+}
+
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.site-header h1 {
+    margin: 0;
+    font-size: 1.35em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--star-gold);
+}
+
+.main-nav {
+    display: flex;
+    gap: 24px;
+}
+
+.main-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78em;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245, 233, 208, 0.9);
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.main-nav a:hover {
+    color: var(--highlight-yellow);
+    text-shadow: 0 0 6px rgba(242,200,121,0.6);
+}
+
+.exhibit {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+}
+
+.exhibit-inner {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 60px;
+    align-items: center;
+}
+
+
+.exhibit-text h2 {
+    font-size: 2.6em;
+    margin-bottom: 16px;
+    color: var(--star-gold);
+    letter-spacing: 0.04em;
+}
+
+.exhibit-text h3 {
+    font-size: 1em;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245, 233, 208, 0.7);
+    margin-bottom: 24px;
+}
+
+.exhibit-text p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.02em;
+    line-height: 1.8;
+    color: rgba(245, 233, 208, 0.95);
+    margin-bottom: 20px;
+}
+
+.exhibit-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, #0f2547, #08172e);
+    background-size: 400% 400%;
+    border: 1px solid rgba(242, 200, 121, 0.45);
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.45),
+        inset 0 0 0 6px rgba(242, 200, 121, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow 0.35s ease, transform 0.35s ease;
+    animation: slow-sky 40s ease infinite;
+}
+
+.exhibit-frame:hover {
+    box-shadow:
+        0 30px 60px rgba(242, 200, 121, 0.6),
+        0 0 25px rgba(242, 200, 121, 0.3) inset;
+    transform: translateY(-3px);
+}
+
+.exhibit-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@keyframes slow-sky {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+footer {
+    border-top: 1px solid rgba(242, 200, 121, 0.35);
+    padding: 6px 10px;
+    text-align: center;
+    font-size: 0.62em;
+    font-family: 'Inter', sans-serif;
+    color: rgba(245, 233, 208, 0.6);
+}
+
+footer p {
+    margin: 0;
+    line-height: 1.4;
+}
+
+.license-icons {
+    margin-top: 4px;
+}
+
+.license-icons img {
+    width: 10px;
+    height: 10px;
+    margin-left: 4px;
+    vertical-align: middle;
+    opacity: 0.75;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.license-icons img:hover {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+@media (max-width: 900px) {
+    .exhibit-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .exhibit-frame {
+        aspect-ratio: 3 / 4;
+    }
+
+    .exhibit-text h2 {
+        font-size: 2.1em;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="fade-overlay" id="fadeOverlay"></div>
+
+<header class="site-header">
+    <div class="header-inner">
+        <h1>Elenitech</h1>
+        <nav class="main-nav">
+            <a href="emptech-index.html">Home</a>
+            <a href="emptech-profile.html">Feature</a>
+            <a href="sell.html">Sell My Art</a>
+            <a href="archive.html">Archive</a>
+        </nav>
+    </div>
+</header>
+
+<section class="exhibit">
+    <div class="exhibit-inner">
+
+        <div class="exhibit-text">
+            <h3>Main Exhibit</h3>
+            <h2>Mona Elen</h2>
+            <p>
+                This primary exhibit explores contemporary interpretations inspired by
+                Vincent van Gogh’s <em>The Starry Night</em>. Each work reflects the
+                artist’s emotional response to night, memory, and inner turbulence.
+            </p>
+            <p>
+                Through digital presentation, this space invites viewers to examine
+                how classic themes of movement, color, and emotion persist within
+                modern artistic practice.
+            </p>
+        </div>
+
+        <div class="exhibit-frame">
+            <!-- Replace with your artwork -->
+            <img src="mona-elen.png" alt="Main Exhibit Artwork">
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <p>
+        <a href="https://elenetichsupang.com">Elenitech</a> © 2026 ·
+        <a href="https://user.com">Daniel Ambegia</a> ·
+        <a href="https://creativecommons.org/licenses/by-nd/4.0/">CC BY-ND 4.0</a>
+    </p>
+    <div class="license-icons">
+        <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="Creative Commons">
+        <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="Attribution">
+        <img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="No Derivatives">
+    </div>
+</footer>
+
+<script>
+const overlay = document.getElementById("fadeOverlay");
+
+window.addEventListener("load", () => {
+    overlay.classList.add("hidden");
+});
+
+document.querySelectorAll("a[href]").forEach(link => {
+    link.addEventListener("click", e => {
+        const url = link.getAttribute("href");
+        if (!url.startsWith("#")) {
+            e.preventDefault();
+            overlay.classList.remove("hidden");
+            overlay.classList.add("active");
+            setTimeout(() => {
+                window.location.href = url;
+            }, 800);
+        }
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>National Artists | Elenitech Supang</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --night-blue: #0b1a33;
+    --deep-blue: #13294b;
+    --star-gold: #f2c879;
+    --soft-cream: #f5e9d0;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Playfair Display', serif;
+    background:
+        linear-gradient(rgba(11,26,51,0.85), rgba(11,26,51,0.9)),
+        url('bg-p.jpg') center / cover no-repeat;
+    color: var(--soft-cream);
+}
+
+.fade-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    opacity: 1;
+    z-index: 999;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+}
+
+.fade-overlay.hidden {
+    opacity: 0;
+}
+
+.fade-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.site-header {
+    background: rgba(11, 26, 51, 0.92);
+    border-bottom: 1px solid rgba(242, 200, 121, 0.4);
+}
+
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-header h1 {
+    font-size: 1.35em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--star-gold);
+    margin: 0;
+}
+
+.main-nav {
+    display: flex;
+    gap: 24px;
+}
+
+.main-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78em;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,233,208,0.85);
+}
+
+.main-nav a:hover {
+    color: var(--star-gold);
+}
+
+.page-title {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.page-title h2 {
+    font-size: 2.4em;
+    color: var(--star-gold);
+    margin: 0 0 6px 0;
+}
+
+.page-title p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95em;
+    color: rgba(245,233,208,0.85);
+    margin: 0;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1080px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.profile {
+    position: relative;
+}
+    
+.profile img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid rgba(242,200,121,0.5);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.6);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.profile img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+}
+
+.name-box {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(11,26,51,0.85);
+    color: var(--star-gold);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8em;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.profile:hover .name-box {
+    opacity: 1;
+}
+
+/* FOOTER LINK */
+.back-link {
+    display: block;
+    text-align: center;
+    margin-bottom: 40px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75em;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.back-link a {
+    color: var(--star-gold);
+}
+
+
+@media (max-width: 1024px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 720px;
+        margin: 30px auto;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-inner {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .gallery {
+        grid-template-columns: 1fr;
+        max-width: 90%;
+    }
+
+    .page-title h2 {
+        font-size: 2em;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="fade-overlay" id="fadeOverlay"></div>
+
+<header class="site-header">
+    <div class="header-inner">
+        <h1>Elenitech</h1>
+        <nav class="main-nav">
+            <a href="emptech-index.html">Home</a>
+            <a href="main-exhibit.html">Main Exhibit</a>
+            <a href="sell.html">Sell My Art</a>
+            <a href="archive.html">Archive</a>
+        </nav>
+    </div>
+</header>
+
+<section class="page-title">
+    <h2>National Artists of 2025</h2>
+    <p>Featured creators shaping contemporary cultural expression</p>
+</section>
+
+<div class="gallery">
+
+    <a href="album1.html" class="profile">
+        <img src="B2AMBEGIA.jpg" alt="Daniel Ambegia">
+        <div class="name-box">Daniel Ambegia</div>
+    </a>
+
+    <a href="album2.html" class="profile">
+        <img src="B8MONTEYMAYOR.jpg" alt="Myk Montemayor">
+        <div class="name-box">Myk Montemayor</div>
+    </a>
+
+    <a href="album3.html" class="profile">
+        <img src="B5BELEN.jpg" alt="Gabriel Belen">
+        <div class="name-box">Gabriel Belen</div>
+    </a>
+
+    <a href="album4.html" class="profile">
+        <img src="B11QUIZON.jpg" alt="Uno Quizon">
+        <div class="name-box">Uno Quizon</div>
+    </a>
+
+    <a href="album5.html" class="profile">
+        <img src="B15TANO.jpg" alt="Sean Taño">
+        <div class="name-box">Sean Taño</div>
+    </a>
+
+    <a href="album6.html" class="profile">
+        <img src="B16ZAMORA.jpg" alt="Carl Zamora">
+        <div class="name-box">Carl Zamora</div>
+    </a>
+
+    <a href="album7.html" class="profile">
+        <img src="G8_DOROL.jpg" alt="Shanin Dorol">
+        <div class="name-box">Shanin Dorol</div>
+    </a>
+
+    <a href="album8.html" class="profile">
+        <img src="SALANDANAN.jpg" alt="Kainah Salandanan">
+        <div class="name-box">Kainah Salandanan</div>
+    </a>
+
+    <a href="album9.html" class="profile">
+        <img src="G22_TUPAS.jpg" alt="Hazel Tupas">
+        <div class="name-box">Hazel Tupas</div>
+    </a>
+
+</div>
+
+<div class="back-link">
+    <a href="emptech-index.html">← Return to Home</a>
+</div>
+
+<script>
+const overlay = document.getElementById("fadeOverlay");
+
+window.addEventListener("load", () => {
+    overlay.classList.add("hidden");
+});
+
+document.querySelectorAll("a[href]").forEach(link => {
+    link.addEventListener("click", e => {
+        const url = link.getAttribute("href");
+        if (!url.startsWith("#")) {
+            e.preventDefault();
+            overlay.classList.remove("hidden");
+            overlay.classList.add("active");
+            setTimeout(() => {
+                window.location.href = url;
+            }, 800);
+        }
+    });
+});
+</script>
+
+</body>
+</html>
