@@ -44,7 +44,6 @@ html, body {
     min-height: 80vh;
 }
 
-
 .site-header {
     position: sticky;
     top: 0;
@@ -82,6 +81,7 @@ html, body {
     text-transform: uppercase;
     color: rgba(245,233,208,0.9);
     transition: color 0.25s ease, text-shadow 0.25s ease;
+    text-decoration: none;
 }
 
 .main-nav a:hover {
@@ -92,12 +92,9 @@ html, body {
 .featured-art {
     display: flex;
     align-items: flex-start;
-    justify-content: flex-start;
     padding: 60px 40px;
     gap: 40px;
     min-height: calc(80vh - 80px);
-    background: var(--night-blue);
-    position: relative;
 }
 
 .art-column {
@@ -107,7 +104,6 @@ html, body {
     gap: 12px;
     padding-left: 20px;
 }
-
 
 .artist-name {
     font-size: 2.6em;
@@ -120,9 +116,7 @@ html, body {
     font-family: 'Inter', sans-serif;
     font-size: 1.1em;
     color: rgba(245,233,208,0.85);
-    margin-top: 6px;
-    margin-bottom: 12px;
-    letter-spacing: 0.03em;
+    margin: 6px 0 12px;
 }
 
 .video-frame {
@@ -133,27 +127,58 @@ html, body {
     border-radius: 16px;
     overflow: hidden;
     border: 4px solid rgba(242,200,121,0.6);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 25px rgba(242,200,121,0.2) inset;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7),
+                0 0 25px rgba(242,200,121,0.2) inset;
     background: rgba(0,0,0,0.1);
 }
 
-.video-frame video.artwork {
+.video-frame video {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
+.video-controls {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.75),
+        rgba(0,0,0,0)
+    );
+}
+
+.video-controls button {
+    background: none;
+    border: none;
+    color: var(--soft-cream);
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+.video-controls button:hover {
+    color: var(--highlight-yellow);
+}
+
+.video-controls input[type="range"] {
+    flex: 1;
+    height: 4px;
+    cursor: pointer;
+}
+
 .info-column {
     flex: 1 1 35%;
-    color: var(--soft-cream);
     font-family: 'Inter', sans-serif;
     background: rgba(11,26,51,0.7);
     padding: 24px 28px;
     border-radius: 12px;
     box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
     margin-top: calc(92px + 1.1em + 12px);
     max-height: 50vh;
     overflow-y: auto;
@@ -163,8 +188,7 @@ html, body {
     font-family: 'Playfair Display', serif;
     font-size: 1.8em;
     color: var(--star-gold);
-    margin-top: 0;
-    margin-bottom: 14px;
+    margin: 0 0 14px;
 }
 
 .info-column p {
@@ -186,13 +210,7 @@ html, body {
 .back-link a {
     color: var(--highlight-yellow);
     text-decoration: none;
-    transition: text-shadow 0.3s ease;
 }
-
-.back-link a:hover {
-    text-shadow: 0 0 8px rgba(242,200,121,0.6);
-}
-
 
 @media (max-width: 1024px) {
     .featured-art {
@@ -200,34 +218,13 @@ html, body {
         padding: 40px 24px;
     }
 
-    .art-column, .info-column {
-        flex: 1 1 100%;
-    }
-
     .video-frame {
         max-width: 90%;
     }
 
     .info-column {
-        max-height: none;
         margin-top: 50px;
-    }
-}
-
-@media (max-width: 768px) {
-    .header-inner {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .main-nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 18px;
-    }
-
-    .artist-name {
-        font-size: 2em;
+        max-height: none;
     }
 }
 </style>
@@ -250,30 +247,68 @@ html, body {
 </header>
 
 <section class="featured-art">
-    
+
     <div class="art-column">
         <h2 class="artist-name">Sean Taño</h2>
         <div class="portrait-title">Title</div>
+
         <div class="video-frame">
-            <video class="artwork" autoplay muted loop playsinline>
+            <video id="artVideo" muted loop playsinline>
                 <source src="art1.mp4" type="video/mp4">
-                Your browser does not support the video tag.
             </video>
+
+            <div class="video-controls">
+                <button id="playPause">▶</button>
+                <input type="range" id="volume" min="0" max="1" step="0.01" value="0">
+                <button id="fullscreen">⛶</button>
+            </div>
         </div>
     </div>
 
     <div class="info-column">
         <h3>About This</h3>
-        <p>lorem ipsum
+        <p>
+lorem ipsum
         </p>
     </div>
 </section>
 
+<div class="back-link">
+    <a href="emptech-profile.html">← Return to Feature</a>
+</div>
+
 <script>
 const overlay = document.getElementById("fadeOverlay");
+const video = document.getElementById("artVideo");
+const playPause = document.getElementById("playPause");
+const volume = document.getElementById("volume");
+const fullscreen = document.getElementById("fullscreen");
 
 window.addEventListener("load", () => {
     overlay.classList.add("hidden");
+});
+
+playPause.addEventListener("click", () => {
+    if (video.paused) {
+        video.play();
+        playPause.textContent = "❚❚";
+    } else {
+        video.pause();
+        playPause.textContent = "▶";
+    }
+});
+
+volume.addEventListener("input", () => {
+    video.muted = false;
+    video.volume = volume.value;
+});
+
+fullscreen.addEventListener("click", () => {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    } else {
+        video.parentElement.requestFullscreen();
+    }
 });
 
 document.querySelectorAll("a[href]").forEach(link => {
@@ -290,11 +325,6 @@ document.querySelectorAll("a[href]").forEach(link => {
     });
 });
 </script>
-<div class="back-link">
-    <a href="emptech-profile.html">← Return to Feature</a>
-</div>
 
 </body>
 </html>
-
-
