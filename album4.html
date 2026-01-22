@@ -26,14 +26,8 @@
     transition: opacity 0.8s ease;
 }
 
-.fade-overlay.hidden {
-    opacity: 0;
-}
-
-.fade-overlay.active {
-    opacity: 1;
-    pointer-events: all;
-}
+.fade-overlay.hidden { opacity: 0; }
+.fade-overlay.active { opacity: 1; pointer-events: all; }
 
 html, body {
     margin: 0;
@@ -43,7 +37,6 @@ html, body {
     color: var(--soft-cream);
     min-height: 80vh;
 }
-
 
 .site-header {
     position: sticky;
@@ -81,12 +74,6 @@ html, body {
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: rgba(245,233,208,0.9);
-    transition: color 0.25s ease, text-shadow 0.25s ease;
-}
-
-.main-nav a:hover {
-    color: var(--highlight-yellow);
-    text-shadow: 0 0 8px rgba(242,200,121,0.6);
 }
 
 .featured-art {
@@ -96,8 +83,6 @@ html, body {
     padding: 60px 40px;
     gap: 40px;
     min-height: calc(80vh - 80px);
-    background: var(--night-blue);
-    position: relative;
 }
 
 .art-column {
@@ -108,21 +93,16 @@ html, body {
     padding-left: 20px;
 }
 
-
 .artist-name {
     font-size: 2.6em;
     color: var(--star-gold);
-    text-shadow: 0 0 12px rgba(242,200,121,0.6);
     margin: 0;
 }
 
 .portrait-title {
     font-family: 'Inter', sans-serif;
     font-size: 1.1em;
-    color: rgba(245,233,208,0.85);
-    margin-top: 6px;
     margin-bottom: 12px;
-    letter-spacing: 0.03em;
 }
 
 .video-frame {
@@ -134,7 +114,6 @@ html, body {
     overflow: hidden;
     border: 4px solid rgba(242,200,121,0.6);
     box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 25px rgba(242,200,121,0.2) inset;
-    background: rgba(0,0,0,0.1);
 }
 
 .video-frame video.artwork {
@@ -143,35 +122,42 @@ html, body {
     object-fit: contain;
 }
 
+/* CUSTOM VIDEO CONTROLS */
+.video-controls {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+}
+
+.video-controls button {
+    background: none;
+    border: none;
+    color: var(--soft-cream);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.video-controls input[type="range"] {
+    width: 90px;
+}
+
 .info-column {
     flex: 1 1 35%;
-    color: var(--soft-cream);
     font-family: 'Inter', sans-serif;
     background: rgba(11,26,51,0.7);
     padding: 24px 28px;
     border-radius: 12px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
     display: flex;
     flex-direction: column;
-    justify-content: center; 
+    justify-content: center;
     margin-top: calc(92px + 1.1em + 12px);
-    max-height: 50vh;
-    overflow-y: auto;
-}
-
-.info-column h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8em;
-    color: var(--star-gold);
-    margin-top: 0;
-    margin-bottom: 14px;
-}
-
-.info-column p {
-    font-size: 1em;
-    line-height: 1.6;
-    margin-bottom: 12px;
-    text-align: justify;
 }
 
 .back-link {
@@ -179,56 +165,6 @@ html, body {
     margin: 40px 0;
     font-family: 'Inter', sans-serif;
     font-size: 0.85em;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-}
-
-.back-link a {
-    color: var(--highlight-yellow);
-    text-decoration: none;
-    transition: text-shadow 0.3s ease;
-}
-
-.back-link a:hover {
-    text-shadow: 0 0 8px rgba(242,200,121,0.6);
-}
-
-
-@media (max-width: 1024px) {
-    .featured-art {
-        flex-direction: column;
-        padding: 40px 24px;
-    }
-
-    .art-column, .info-column {
-        flex: 1 1 100%;
-    }
-
-    .video-frame {
-        max-width: 90%;
-    }
-
-    .info-column {
-        max-height: none;
-        margin-top: 50px;
-    }
-}
-
-@media (max-width: 768px) {
-    .header-inner {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .main-nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 18px;
-    }
-
-    .artist-name {
-        font-size: 2em;
-    }
 }
 </style>
 </head>
@@ -250,15 +186,20 @@ html, body {
 </header>
 
 <section class="featured-art">
-    
     <div class="art-column">
         <h2 class="artist-name">Uno Quizon</h2>
         <div class="portrait-title">Rhino Ascension</div>
+
         <div class="video-frame">
             <video class="artwork" autoplay muted loop playsinline>
                 <source src="uno.mp4" type="video/mp4">
-                Your browser does not support the video tag.
             </video>
+
+            <div class="video-controls">
+                <button class="play-btn">Play</button>
+                <input class="volume" type="range" min="0" max="1" step="0.05">
+                <button class="fullscreen-btn">Fullscreen</button>
+            </div>
         </div>
     </div>
 
@@ -271,32 +212,38 @@ html, body {
 </section>
 
 <script>
-const overlay = document.getElementById("fadeOverlay");
+const video = document.querySelector(".artwork");
+const playBtn = document.querySelector(".play-btn");
+const volume = document.querySelector(".volume");
+const fullscreenBtn = document.querySelector(".fullscreen-btn");
 
-window.addEventListener("load", () => {
-    overlay.classList.add("hidden");
+volume.value = video.volume;
+
+playBtn.addEventListener("click", () => {
+    if (video.paused) {
+        video.play();
+        playBtn.textContent = "Pause";
+    } else {
+        video.pause();
+        playBtn.textContent = "Play";
+    }
 });
 
-document.querySelectorAll("a[href]").forEach(link => {
-    link.addEventListener("click", e => {
-        const url = link.getAttribute("href");
-        if (!url.startsWith("#")) {
-            e.preventDefault();
-            overlay.classList.remove("hidden");
-            overlay.classList.add("active");
-            setTimeout(() => {
-                window.location.href = url;
-            }, 800);
-        }
-    });
+volume.addEventListener("input", () => {
+    video.volume = volume.value;
+    video.muted = volume.value == 0;
+});
+
+fullscreenBtn.addEventListener("click", () => {
+    if (video.requestFullscreen) {
+        video.requestFullscreen();
+    }
 });
 </script>
+
 <div class="back-link">
     <a href="emptech-profile.html">← Return to Feature</a>
 </div>
 
 </body>
 </html>
-
-
-
