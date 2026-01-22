@@ -26,7 +26,10 @@
     transition: opacity 0.8s ease;
 }
 
-.fade-overlay.hidden { opacity: 0; }
+.fade-overlay.hidden {
+    opacity: 0;
+}
+
 .fade-overlay.active {
     opacity: 1;
     pointer-events: all;
@@ -77,6 +80,7 @@ html, body {
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: rgba(245,233,208,0.9);
+    transition: color 0.25s ease, text-shadow 0.25s ease;
     text-decoration: none;
 }
 
@@ -264,7 +268,7 @@ html, body {
     <div class="info-column">
         <h3>About This</h3>
         <p>
-                lorem ipsum
+          lorem ipsum
         </p>
     </div>
 </section>
