@@ -15,7 +15,7 @@
     --highlight-yellow: #f9eab3;
 }
 
-/* FADE OVERLAY */
+/* FADE OVERLAY (UNCHANGED) */
 .fade-overlay {
     position: fixed;
     inset: 0;
@@ -25,15 +25,8 @@
     pointer-events: none;
     transition: opacity 0.8s ease;
 }
-
-.fade-overlay.hidden {
-    opacity: 0;
-}
-
-.fade-overlay.active {
-    opacity: 1;
-    pointer-events: all;
-}
+.fade-overlay.hidden { opacity: 0; }
+.fade-overlay.active { opacity: 1; pointer-events: all; }
 
 html, body {
     margin: 0;
@@ -44,6 +37,7 @@ html, body {
     min-height: 80vh;
 }
 
+/* HEADER (UNCHANGED) */
 .site-header {
     position: sticky;
     top: 0;
@@ -89,6 +83,7 @@ html, body {
     text-shadow: 0 0 8px rgba(242,200,121,0.6);
 }
 
+/* LAYOUT */
 .featured-art {
     display: flex;
     align-items: flex-start;
@@ -119,6 +114,7 @@ html, body {
     margin: 6px 0 12px;
 }
 
+/* VIDEO FRAME */
 .video-frame {
     position: relative;
     width: 100%;
@@ -129,7 +125,7 @@ html, body {
     border: 4px solid rgba(242,200,121,0.6);
     box-shadow: 0 20px 60px rgba(0,0,0,0.7),
                 0 0 25px rgba(242,200,121,0.2) inset;
-    background: rgba(0,0,0,0.1);
+    background: black;
 }
 
 .video-frame video {
@@ -138,40 +134,83 @@ html, body {
     object-fit: contain;
 }
 
-.video-controls {
+/* ===== YOUTUBE-STYLE PLAYER UI ===== */
+.progress-bar {
     position: absolute;
     left: 0;
     right: 0;
+    bottom: 44px;
+    height: 4px;
+    background: rgba(255,255,255,0.25);
+    cursor: pointer;
+    opacity: 0;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: white;
+}
+
+.controls {
+    position: absolute;
     bottom: 0;
+    left: 0;
+    right: 0;
+    height: 44px;
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 10px 14px;
-    background: linear-gradient(
-        to top,
-        rgba(0,0,0,0.75),
-        rgba(0,0,0,0)
-    );
+    padding: 0 12px;
+    background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.video-controls button {
+.video-frame.show-controls .controls,
+.video-frame.show-controls .progress-bar {
+    opacity: 1;
+}
+
+.controls button {
     background: none;
     border: none;
-    color: var(--soft-cream);
+    color: white;
     font-size: 1.1em;
     cursor: pointer;
 }
 
-.video-controls button:hover {
-    color: var(--highlight-yellow);
+.time {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85em;
+    opacity: 0.85;
 }
 
-.video-controls input[type="range"] {
-    flex: 1;
-    height: 4px;
-    cursor: pointer;
+.spacer { flex: 1; }
+
+/* VOLUME DROP-UP */
+.volume-wrapper { position: relative; }
+
+.volume-popup {
+    position: absolute;
+    bottom: 44px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.9);
+    padding: 8px;
+    border-radius: 6px;
+    opacity: 0;
+    pointer-events: none;
 }
 
+.volume-wrapper.active .volume-popup {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.volume-popup input { width: 90px; }
+
+/* INFO COLUMN (RESTORED EXACT STYLE) */
 .info-column {
     flex: 1 1 35%;
     font-family: 'Inter', sans-serif;
@@ -198,6 +237,7 @@ html, body {
     text-align: justify;
 }
 
+/* BACK LINK */
 .back-link {
     text-align: center;
     margin: 40px 0;
@@ -211,22 +251,6 @@ html, body {
     color: var(--highlight-yellow);
     text-decoration: none;
 }
-
-@media (max-width: 1024px) {
-    .featured-art {
-        flex-direction: column;
-        padding: 40px 24px;
-    }
-
-    .video-frame {
-        max-width: 90%;
-    }
-
-    .info-column {
-        margin-top: 50px;
-        max-height: none;
-    }
-}
 </style>
 </head>
 
@@ -235,95 +259,143 @@ html, body {
 <div class="fade-overlay" id="fadeOverlay"></div>
 
 <header class="site-header">
-    <div class="header-inner">
-        <h1>Elenitech</h1>
-        <nav class="main-nav">
-            <a href="emptech-index.html">Home</a>
-            <a href="main-exhibit.html">Main Exhibit</a>
-            <a href="sell.html">Sell My Art</a>
-            <a href="archive.html">Archive</a>
-        </nav>
-    </div>
+<div class="header-inner">
+<h1>Elenitech</h1>
+<nav class="main-nav">
+<a href="emptech-index.html">Home</a>
+<a href="main-exhibit.html">Main Exhibit</a>
+<a href="sell.html">Sell My Art</a>
+<a href="archive.html">Archive</a>
+</nav>
+</div>
 </header>
 
 <section class="featured-art">
 
-    <div class="art-column">
-        <h2 class="artist-name">Hazel Tupas</h2>
-        <div class="portrait-title">Microsoft Animation</div>
+<div class="art-column">
+<h2 class="artist-name">Microsoft</h2>
+<div class="portrait-title">Hazel Tupas</div>
 
-        <div class="video-frame">
-            <video id="artVideo" muted loop playsinline>
-                <source src="hazel.mp4" type="video/mp4">
-            </video>
+<div class="video-frame" id="player">
 
-            <div class="video-controls">
-                <button id="playPause">▶</button>
-                <input type="range" id="volume" min="0" max="1" step="0.01" value="0">
-                <button id="fullscreen">⛶</button>
-            </div>
-        </div>
-    </div>
+<video id="video" src="hazel.mp4"></video>
 
-    <div class="info-column">
-        <h3>About This</h3>
-        <p>
+<div class="progress-bar" id="progressBar">
+<div class="progress-fill" id="progressFill"></div>
+</div>
+
+<div class="controls">
+<button id="play">▶</button>
+<div class="time" id="time">0:00 / 0:00</div>
+
+<div class="volume-wrapper">
+<button id="volumeBtn">🔊</button>
+<div class="volume-popup">
+<input type="range" id="volume" min="0" max="1" step="0.01" value="0.7">
+</div>
+</div>
+
+<div class="spacer"></div>
+<button id="fullscreen">⛶</button>
+</div>
+
+</div>
+</div>
+
+<div class="info-column">
+<h3>About This</h3>
+<p>
             The PowerPoint presentation focuses on 3D animation, using the Microsoft Surface Laptop as the main model. The concept is inspired by a product advertisement, where the laptop is presented through moving 3D visuals, timed text, and sound effects to make it more engaging. Different animations highlight the Surface Laptop’s design and features, while the use of sound and text helps guide the viewer’s attention and build interest. Even though it was made in PowerPoint, the presentation shows how 3D animation tools can be used creatively to produce a clean, ad-like result. Overall, the presentation aims to make the Surface Laptop look modern, dynamic, and appealing through motion and multimedia.
+</p>
+</div>
 
-        </p>
-    </div>
 </section>
 
 <div class="back-link">
-    <a href="emptech-profile.html">← Return to Feature</a>
+<a href="emptech-profile.html">← Return to Feature</a>
 </div>
 
 <script>
 const overlay = document.getElementById("fadeOverlay");
-const video = document.getElementById("artVideo");
-const playPause = document.getElementById("playPause");
+const player = document.getElementById("player");
+const video = document.getElementById("video");
+const play = document.getElementById("play");
+const progressBar = document.getElementById("progressBar");
+const progressFill = document.getElementById("progressFill");
+const time = document.getElementById("time");
+const volumeBtn = document.getElementById("volumeBtn");
 const volume = document.getElementById("volume");
+const volumeWrap = document.querySelector(".volume-wrapper");
 const fullscreen = document.getElementById("fullscreen");
 
-window.addEventListener("load", () => {
-    overlay.classList.add("hidden");
+let hideTimeout;
+
+/* FADE LOAD */
+window.addEventListener("load", () => overlay.classList.add("hidden"));
+
+/* SHOW CONTROLS ON MOVE */
+function showControls() {
+  player.classList.add("show-controls");
+  clearTimeout(hideTimeout);
+  hideTimeout = setTimeout(() =>
+    player.classList.remove("show-controls"), 2500);
+}
+player.addEventListener("mousemove", showControls);
+
+/* PLAY / PAUSE */
+play.onclick = () => {
+  if (video.paused) {
+    video.play(); play.textContent = "❚❚";
+  } else {
+    video.pause(); play.textContent = "▶";
+  }
+};
+
+/* TIME UPDATE */
+video.addEventListener("timeupdate", () => {
+  progressFill.style.width =
+    (video.currentTime / video.duration) * 100 + "%";
+
+  const c = Math.floor(video.currentTime);
+  const d = Math.floor(video.duration || 0);
+  time.textContent =
+    `${Math.floor(c/60)}:${String(c%60).padStart(2,"0")} / 
+     ${Math.floor(d/60)}:${String(d%60).padStart(2,"0")}`;
 });
 
-playPause.addEventListener("click", () => {
-    if (video.paused) {
-        video.play();
-        playPause.textContent = "❚❚";
-    } else {
-        video.pause();
-        playPause.textContent = "▶";
-    }
-});
+/* SCRUB SEEK */
+let scrubbing = false;
+progressBar.onmousedown = e => { scrubbing = true; scrub(e); };
+window.onmouseup = () => scrubbing = false;
+progressBar.onmousemove = e => scrubbing && scrub(e);
 
-volume.addEventListener("input", () => {
-    video.muted = false;
-    video.volume = volume.value;
-});
+function scrub(e) {
+  const r = progressBar.getBoundingClientRect();
+  video.currentTime =
+    ((e.clientX - r.left) / r.width) * video.duration;
+}
 
-fullscreen.addEventListener("click", () => {
-    if (document.fullscreenElement) {
-        document.exitFullscreen();
-    } else {
-        video.parentElement.requestFullscreen();
-    }
-});
+/* VOLUME */
+volumeBtn.onclick = () => volumeWrap.classList.toggle("active");
+volume.oninput = () => video.volume = volume.value;
 
+/* FULLSCREEN */
+fullscreen.onclick = () => {
+  document.fullscreenElement ? document.exitFullscreen()
+                             : player.requestFullscreen();
+};
+
+/* FADE NAVIGATION */
 document.querySelectorAll("a[href]").forEach(link => {
-    link.addEventListener("click", e => {
-        const url = link.getAttribute("href");
-        if (!url.startsWith("#")) {
-            e.preventDefault();
-            overlay.classList.remove("hidden");
-            overlay.classList.add("active");
-            setTimeout(() => {
-                window.location.href = url;
-            }, 800);
-        }
-    });
+  link.addEventListener("click", e => {
+    const url = link.getAttribute("href");
+    if (!url.startsWith("#")) {
+      e.preventDefault();
+      overlay.classList.remove("hidden");
+      overlay.classList.add("active");
+      setTimeout(() => window.location.href = url, 800);
+    }
+  });
 });
 </script>
 
